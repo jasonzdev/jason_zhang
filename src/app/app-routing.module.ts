@@ -13,23 +13,23 @@ export const appRoutes: Routes = [
       component: LoginComponent,
   },
   {
-    path: 'signup', 
+    path: 'signup',
     component: SecondaryComponent,
   },
   {
-    path: 'home', 
+    path: 'home',
     component: SecondaryComponent,
-    canActivate:[AuthGuard]
+    canActivate: [AuthGuard]
   },
 
-  {path: '**', redirectTo: '/home', pathMatch:'full'}
+  {path: '**', redirectTo: '/home', pathMatch: 'full'}
 ];
 
 @NgModule({
   imports: [
     RouterModule.forRoot(appRoutes),
   ],
-  exports:[
+  exports: [
     RouterModule
   ]
 })
