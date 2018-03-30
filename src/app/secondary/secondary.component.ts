@@ -28,7 +28,7 @@ export class SecondaryComponent{
   sortedCollection: any[];
   constructor(public router: Router, public _http: HttpClient, private _token: TokenService, private orderPipe: OrderPipe) {
     // this.jwt = localStorage.getItem('id_token');
-    
+    this.sortedCollection = orderPipe.transform(this.order, 'obj.COMPANY');
   }
 
   setOrder(value: string) {
@@ -84,6 +84,9 @@ export class SecondaryComponent{
       switch (sort.active) {
         case 'company': return compare(a.COMPANY, b.COMPANY, isAsc);
         case 'ponum': return compare(+a.PONUM, +b.PONUM, isAsc);
+        case 'instid': return compare(+a.INSTID, +b.INSTID, isAsc);
+        case 'DESCRIPTION': return compare(+a.DESCRIPTION, +b.DESCRIPTION, isAsc);
+        case 'instOCODEid': return compare(+a.OCODE, +b.OCODE, isAsc);
         case 'instid': return compare(+a.INSTID, +b.INSTID, isAsc);
         default: return 0;
       }
