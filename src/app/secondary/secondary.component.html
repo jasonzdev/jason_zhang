@@ -5,7 +5,60 @@
 
 
     <p><a class="btn btn-primary btn-lg" role="button" (click)="logout()">Logout</a></p>
-    <h2 *ngIf="response">The response of calling the <span class="red"></span> API is:</h2>
-    <h3 *ngIf="response"></h3>
+
+    <div id="ok"></div>
+
+    <!-- <table>
+   <thead>
+     <tr>
+       <td>Company</td>
+       <td>PONUM</td>
+       <td>INSTID</td>
+     </tr>
+   </thead>
+   <input type="text" [(ngModel)]="term">
+   <tbody>
+    <tr *ngFor="let obj of orders | filter:term">
+      <td>{{ obj.COMPANY }}</td>
+      <td>{{ obj.PONUM }}</td>
+      <td>{{ obj.INSTID }}</td>
+    </tr>
+  </tbody>
+    </table> -->
+  
+
   </div>
 </div>
+
+<!-- <table *ngIf="orders" matSort (matSortChange)="sortData($event)">
+    <tr>
+      <th mat-sort-header="company">Company</th>
+      <th mat-sort-header="PONUM">PONUM</th>
+      <th mat-sort-header="instid">INSTID</th>
+ 
+    </tr>
+  
+    <tr *ngFor="let obj of orders">
+        <td>{{ obj.COMPANY }}</td>
+        <td>{{ obj.PONUM }}</td>
+        <td>{{ obj.INSTID }}</td>
+    </tr>
+  </table> -->
+  <table *ngIf="orders">
+      <tr>
+          <input type="text" [(ngModel)]="term">
+        <!-- <th mat-sort-header="company" [class.active]="order === 'id'"(click)="setOrder('id')">Company</th>
+        <th mat-sort-header="PONUM">PONUM</th>
+        <th mat-sort-header="instid">INSTID</th> -->
+        <th [class.active]="order === 'COMPANY'"(click)="setOrder('COMPANY')">Company</th>
+        <th [class.active]="order === 'PONUM'"(click)="setOrder('PONUM')">PONUM</th>
+        <th [class.active]="order === 'INSTID'"(click)="setOrder('INSTID')">INSTID</th>
+      </tr>
+    
+      <tr *ngFor="let obj of orders | orderBy: order:reverse:'case-insensitive'">
+          <td>{{ obj.COMPANY }}</td>
+          <td>{{ obj.PONUM }}</td>
+          <td>{{ obj.INSTID }}</td>
+      </tr>
+    </table>
+  

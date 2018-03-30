@@ -13,6 +13,9 @@ import { AuthGuard } from './auth/auth.guard';
 // import { AUTH_PROVIDERS } from 'angular2-jwt';
 import { AuthService } from './auth/auth.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { OrderModule } from 'ngx-order-pipe';
+
 
 // import services
 import { TokenService } from './services/token.service';
@@ -21,18 +24,32 @@ import { TokenService } from './services/token.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { UnauthInterceptor } from './interceptors/unauth.interceptor';
+import { OrderFilter } from './filters/order-filter.pipe';
+import { FormsModule } from '@angular/forms';
+import {MatButtonModule, MatCheckboxModule, MatButton, MatSortModule, MatTableDataSource, MatTableModule} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    SecondaryComponent
+    SecondaryComponent,
+    OrderFilter,
   ],
   imports: [
     NgbModule,
     BrowserModule,
     AppRoutingModule,
     LoginRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    Ng2SearchPipeModule,
+    MatButtonModule,
+    MatSortModule,
+    MatTableModule,
+    BrowserAnimationsModule,
+    OrderModule
+
   ],
   providers: [
     ConfigService, AuthGuard,
