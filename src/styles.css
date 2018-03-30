@@ -9061,3 +9061,19 @@ table th {
     border-bottom: 0;
   }
 }
+.please-wait{
+  transition:1s;
+  text-align:center;
+  font-size:30px;
+}
+.showLoading{
+  opacity:0;
+}
+.order--wrapper{
+  transition:1s;
+  opacity:0;
+}
+.show-order{
+
+  opacity:1;
+}

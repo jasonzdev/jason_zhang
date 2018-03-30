@@ -16,7 +16,7 @@ import { OrderPipe } from 'ngx-order-pipe';
   templateUrl: './secondary.component.html',
   styleUrls: ['./secondary.component.css']
 })
-export class SecondaryComponent{
+export class SecondaryComponent {
   public orders;
   jwt: string;
   decodedJwt: string;
@@ -26,11 +26,13 @@ export class SecondaryComponent{
   order: string = 'obj.COMPANY';
   reverse: boolean = false;
   sortedCollection: any[];
+  showHide = false;
+  showOrder = false;
   @Input()
   public alerts: Array<IAlert> = [];
   constructor(public router: Router, public _http: HttpClient, private _token: TokenService, private orderPipe: OrderPipe) {
-   
-    
+
+
 
     this.alerts.push({
       id: 1,
@@ -48,7 +50,7 @@ export class SecondaryComponent{
     this.order = value;
   }
   ngOnInit() {
-    
+
     this.get();
 
 
@@ -66,8 +68,9 @@ export class SecondaryComponent{
       .subscribe(
 
         (orderLogs: Array<OrderLogResponse>) => {
+          this.deleteWait();
           this.orders = orderLogs;
-         
+
           // console.log(orderLogs);
         },
         error => {
@@ -78,17 +81,24 @@ export class SecondaryComponent{
       );
 
   }
+
+  deleteWait() {
+    this.showHide = true;
+    this.showOrder = true;
+
+  }
+
   sortData(sort: Sort) {
     const data = this.orders;
-   
+
     if (!sort.active || sort.direction == '') {
       this.sortedData = data;
-      
+
       return;
     }
 
     this.sortedData = data.sort((a, b) => {
-    console.log(b);
+      console.log(b);
       let isAsc = sort.direction == 'asc';
       switch (sort.active) {
         case 'company': return compare(a.COMPANY, b.COMPANY, isAsc);
