@@ -26,9 +26,18 @@ export class SecondaryComponent{
   order: string = 'obj.COMPANY';
   reverse: boolean = false;
   sortedCollection: any[];
+  @Input()
+  public alerts: Array<IAlert> = [];
   constructor(public router: Router, public _http: HttpClient, private _token: TokenService, private orderPipe: OrderPipe) {
-    // this.jwt = localStorage.getItem('id_token');
-    this.sortedCollection = orderPipe.transform(this.order, 'obj.COMPANY');
+   
+    
+
+    this.alerts.push({
+      id: 1,
+      type: 'success',
+      message: 'You have successfully Logged in.',
+    });
+
   }
 
   setOrder(value: string) {
@@ -93,8 +102,19 @@ export class SecondaryComponent{
     });
 
   }
-  
+  public closeAlert(alert: IAlert) {
+    const index: number = this.alerts.indexOf(alert);
+    this.alerts.splice(index, 1);
+  }
+
+
 }
 function compare(a, b, isAsc) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+}
+
+export interface IAlert {
+  id: number;
+  type: string;
+  message: string;
 }

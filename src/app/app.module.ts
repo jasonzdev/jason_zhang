@@ -37,7 +37,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     OrderFilter,
   ],
   imports: [
-    NgbModule,
+    NgbModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
     LoginRoutingModule,

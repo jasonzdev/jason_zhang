@@ -1,41 +1,82 @@
-<div>
-  <div class="home jumbotron centered">
-    <h1>You have successfully Logged in</h1>
-    
-
-
-    <p><a class="btn btn-primary btn-lg" role="button" (click)="logout()">Logout</a></p>
-
-
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/home">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
   
 
-  </div>
+
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+          <a class="btn btn-sm btn-outline-secondary btn-logout" role="button" (click)="logout()">Logout</a>
+      </form>
+    </div>
+  </nav>
+
+<div>
+    <p *ngFor="let alert of alerts">
+        <ngb-alert [type]="alert.type" (close)="closeAlert(alert)">{{alert.message}}</ngb-alert>
+      </p>
 </div>
-
-
-  <table *ngIf="orders" class="table">
-      <input type="text" [(ngModel)]="term">
-      <tr>
+<div class="jumbotron">
+    <h1 class="display-4">Hello, welcome to your new Order Logs View</h1>
+    <p class="lead">This is an example of how a Order Log Table may look like.</p>
+    <hr class="my-4">
+    <p><strong>Responsiveness</strong>: I added a responsiveness to the table when the browser goes below a certain threshold.</p>
+    <p><strong>Sortable</strong>: The Company Category and OrderDate Category are sortable from ascending to descending.</p>
+    <p><strong>Search</strong>: The Search Bar will search for key terms inside the table and show those results.</p>
+  
+  </div>
+<input type="text" placeholder=" Search" [(ngModel)]="term" class="order-search">
+  <table *ngIf="orders" class="table order--table">
+      
+      <thead>
          
         <!-- <th mat-sort-header="company" [class.active]="order === 'id'"(click)="setOrder('id')">Company</th>
         <th mat-sort-header="PONUM">PONUM</th>
         <th mat-sort-header="instid">INSTID</th> -->
-        <th [class.active]="order === 'COMPANY'"(click)="setOrder('COMPANY')">Company<span [hidden]="reverse">▼</span
-          ><span [hidden]="!reverse">▲</span></th>
-        <th [class.active]="order === 'PONUM'"(click)="setOrder('PONUM')">PONUM</th>
-        <th [class.active]="order === 'INSTID'"(click)="setOrder('INSTID')">INSTID</th>
-        <th [class.active]="order === 'DESCRIPTION'"(click)="setOrder('DESCRIPTION')">DESCRIPTION</th>
-        <th [class.active]="order === 'OCODE'"(click)="setOrder('OCODE')">OCODE</th>
-        <th [class.active]="order === 'ORDERDATE'"(click)="setOrder('ORDERDATE')">ORDERDATE</th>
-      </tr>
+
+        <th>CANNUM</th>
+        <th [class.active]="order === 'COMPANY'"(click)="setOrder('COMPANY')" class="sortable-th">
+          Company
+          <span [hidden]="reverse">▼</span>
+          <span [hidden]="!reverse">▲</span>
+        </th>
+        <th scope="col">DESCRIPTION</th>
+        <th scope="col">INSTID</th>
+        <th scope="col">OCODE</th>
+        <th [class.active]="order === 'ORDERDATE'"(click)="setOrder('ORDERDATE')" class="sortable-th">
+          <div class="inline-th-header">
+              ORDERDATE
+          </div>
+          <div class="inline-span-arrows">
+          <span [hidden]="reverse">▼</span>
+          <span [hidden]="!reverse">▲</span>
+        </div>
+        </th>
+        <th>ORDERSTATUS</th>
+        <th>ORDERTYPE</th>
+        <th>PONUM</th>
+        <th>SHIPTONAME</th>
+        <th>TOTALCOST</th>
+        <th>USER_REF_NBR</th>
+      </thead>
     
       <tr *ngFor="let obj of orders | orderBy: order:reverse:'case-insensitive' | filter:term">
-          <td>{{ obj.COMPANY }}</td>
-          <td>{{ obj.PONUM }}</td>
-          <td>{{ obj.INSTID }}</td>
-          <td>{{ obj.DESCRIPTION }}</td>
-          <td>{{ obj.OCODE }}</td>
-          <td>{{ obj.ORDERDATE }}</td>
+          <td data-label="CANMUM">{{ obj.CANNUM }}</td>
+          <td data-label="COMPANY">{{ obj.COMPANY }}</td>
+          <td data-label="DESCRIPTION">{{ obj.DESCRIPTION }}</td>
+          <td data-label="INSTID">{{ obj.INSTID }}</td>
+          <td data-label="OCODE">{{ obj.OCODE }}</td>
+          <td data-label="ORDERDATE">{{ obj.ORDERDATE | date:'MM-dd-yyyy'}}</td>
+          <td data-label="ORDERSTATUS">{{ obj.ORDERSTATUS }}</td>
+          <td data-label="ORDERTYPE">{{ obj.ORDERTYPE }}</td>
+          <td data-label="PONUM">{{ obj.PONUM }}</td>
+          <td data-label="SHIPTONAME">{{ obj.SHIPTONAME }}</td>
+          <td data-label="TOTALCOST">{{ obj.TOTALCOST }}</td>
+          <td data-label="USER_REF_NBR">{{ obj.USER_REF_NBR }}</td>
       </tr>
     </table>
-  
