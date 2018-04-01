@@ -1,0 +1,29 @@
+.login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    flex-direction: column;
+}
+
+.login.jumbotron{
+    width: 500px;
+    border-radius:0px;
+    margin-bottom:5px;
+}
+
+.login .btn-primary{
+    width:100%;
+}
+
+.invalidLogin{
+    opacity:0;
+  }
+  .invalidLogin.active{
+    opacity:1;
+  }
+
+  .login-wrapper h1{
+      font-size:2rem;
+  }

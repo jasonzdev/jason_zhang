@@ -1,8 +1,10 @@
 
+<div class="login-wrapper">
 
 <div *ngIf="message" [ngClass]="{ 'alert': message, 'alert-success': message.type === 'success', 'alert-danger': message.type === 'error' }">{{message.text}}</div>
 <div class="login jumbotron center-block">
-   <h1>Login</h1>
+   <h1>Log in</h1>
+   <hr>
    <form role="form" (submit)="login($event, username.value, password.value)">
    <div class="form-group">
      <label for="username">Username</label>
@@ -12,10 +14,13 @@
      <label for="password">Password</label>
      <input type="password" #password class="form-control" id="password" placeholder="Password">
    </div>
-   <button type="submit" class="btn btn-default">Submit</button>
-    
+   <button type="submit" class="btn btn-default btn-primary">Sign In</button>
+    <!-- <div class="invalidLogin" [class.active]="loginInvalid">Invalid Username or Password.</div> -->
+
  </form>
  </div>
-<div>
-
+ <div class="alert alert-danger invalidLogin" [class.active]="loginInvalid" role="alert">
+    Invalid Username or Password.
+  </div>
+</div>
 <router-outlet></router-outlet>

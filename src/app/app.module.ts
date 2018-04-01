@@ -26,7 +26,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
 import { UnauthInterceptor } from './interceptors/unauth.interceptor';
 import { OrderFilter } from './filters/order-filter.pipe';
 import { FormsModule } from '@angular/forms';
-import {MatButtonModule, MatCheckboxModule, MatButton, MatSortModule, MatTableDataSource, MatTableModule} from '@angular/material';
+import {MatButtonModule, MatCheckboxModule, MatButton, MatSortModule, MatTableDataSource, MatTableModule, MatInputModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -48,7 +48,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MatSortModule,
     MatTableModule,
     BrowserAnimationsModule,
-    OrderModule
+    OrderModule,
+    MatInputModule
 
   ],
   providers: [

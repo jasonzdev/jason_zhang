@@ -6,7 +6,7 @@ import { OrderLogResponse } from '../interfaces/orderLog.response';
 import { map } from 'rxjs/operator/map';
 import { Orders } from '../filters/orders';
 import { Subscription } from 'rxjs/Subscription';
-import { Sort, MatTableDataSource, MatSort } from '@angular/material';
+import { Sort, MatTableDataSource, MatSort, MatInputModule } from '@angular/material';
 import { OrderPipe } from 'ngx-order-pipe';
 
 // import { AuthHttp } from 'angular2-jwt';
@@ -28,8 +28,14 @@ export class SecondaryComponent {
   sortedCollection: any[];
   showHide = false;
   showOrder = false;
+  showFailure = false;
+  showLoadingMessage = 'Please wait while data loads...';
+  destroyLoading = false;
+  isMe = 5;
+
   @Input()
   public alerts: Array<IAlert> = [];
+
   constructor(public router: Router, public _http: HttpClient, private _token: TokenService, private orderPipe: OrderPipe) {
 
 
@@ -38,6 +44,7 @@ export class SecondaryComponent {
       id: 1,
       type: 'success',
       message: 'You have successfully Logged in.',
+      
     });
 
   }
@@ -68,15 +75,21 @@ export class SecondaryComponent {
       .subscribe(
 
         (orderLogs: Array<OrderLogResponse>) => {
+          this.showLoadingMessage ='Success';
+          this.isMe = 100;
           this.deleteWait();
           this.orders = orderLogs;
+          
 
           // console.log(orderLogs);
         },
         error => {
-          const keys = error.headers.keys();
-          console.log(keys);
-          console.log(error);
+          this.showLoadingMessage ='There was a problem retrieving the data.';
+            this.deleteWait();
+            this.isMe = 0;
+            this.showFailure = true;
+        
+        
         }
       );
 
@@ -85,6 +98,10 @@ export class SecondaryComponent {
   deleteWait() {
     this.showHide = true;
     this.showOrder = true;
+    setTimeout(()=>{
+      this.destroyLoading = true;
+    }, 1000);
+   
 
   }
 

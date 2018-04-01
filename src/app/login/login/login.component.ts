@@ -13,6 +13,7 @@ import { LoginResponse } from '../../interfaces/login.response';
 })
 
 export class LoginComponent implements OnInit {
+  loginInvalid = false;
   config: Config;
   error: any;
   model = {
@@ -49,17 +50,11 @@ export class LoginComponent implements OnInit {
           // Navigate to the home page which has a guard on it.
           this.router.navigate(['home']);
 
-          alert('ok');
         },
         error => {
-          if (error === '404') {
-            console.log('404');
-          }
-          if (error === '401') {
-            console.log('401');
-          }
-          alert('no');
-          console.log(JSON.stringify(error.json()));
+          this.loginInvalid = true;
+
+          
         }
       );
 
